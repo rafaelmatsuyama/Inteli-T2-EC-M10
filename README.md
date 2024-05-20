@@ -40,6 +40,7 @@ Prática/Discussão:
 **Materiais Complementares:**
 
 - [Kubernetes | Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+- [Kubernetes | ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)
 
 
 <br/>
@@ -49,6 +50,8 @@ Prática/Discussão:
 Este Lab irá apresentar alguns dos conceitos fundamentais dentro do Kubernetes.
 
 > **Dica:** É bom trabalhar em pequenos grupos para discutir como adaptar os Deployments para o Projeto do Módulo.
+
+> **Dica:** Certifique-se de que o Minikube esteja no ar antes de começar o Lab, na dúvida, execute o comando `minikube start` no seu Terminal.
 
 1. Vamos começar realizando um Deployment (se não está confiante de como funciona, veja os slides da instrução à respeito), neste caso, de uma Pod contendo o Nginx e com 3 réplicas. Segue o arquivo de Deployment de nome `nginx-deployment.yaml`.
 
@@ -171,3 +174,31 @@ deployment "nginx-deployment" successfully rolled out
 ```
 
 14. E voilá, o Deployment da nova versão do Nginx foi realizado com sucesso! :blush:
+
+> **Discussão:** Como dito na Instrução, um Deployment pode conter nele uma configuração de um ReplicaSet, existe alguma situação onde seria importante ter apenas a configuração do ReplicaSet como um Kind específico e separado do seu Deployment? Por exemplo, uma configuração assim? (Repare que o Kind é do tipo ReplicaSet)
+
+```
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend
+  labels:
+    app: guestbook
+    tier: frontend
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: php-redis
+        image: us-docker.pkg.dev/google-samples/containers/gke/gb-frontend:v5
+```
+
+> **Dica:** Quando quiser deletar o seu Deployment, basta usar o comando `kubectl delete deployment nginx-deployment` para fazer o Kubernetes remover as Pods relacionadas a esse Deployment.
