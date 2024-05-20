@@ -27,3 +27,12 @@ Prática/Discussão:
 - Introdução ao Helm e instalação de algumas aplicações usando charts.
 
 <br/>
+
+**Material de Auto-Estudo:**
+
+- [How To Use minikube for Local Kubernetes Development and Testing](https://www.digitalocean.com/community/tutorials/how-to-use-minikube-for-local-kubernetes-development-and-testing)
+- [O que é orquestração de containers?](https://www.redhat.com/pt-br/topics/containers/what-is-container-orchestration)
+- [Descubra como o Helm facilita a instalação de aplicações no Kubernetes](https://blog.4linux.com.br/o-gerenciador-de-pacotes-helm/)
+- [Helm | Quickstart Guide](https://helm.sh/docs/intro/quickstart/)
+
+<br/>
