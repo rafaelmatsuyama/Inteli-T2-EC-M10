@@ -47,7 +47,7 @@ Prática/Discussão:
 
 **Roteiro do Lab 01:**
 
-Este Lab irá apresentar alguns dos conceitos fundamentais dentro do Kubernetes.
+Este Lab irá apresentar o conceito de Deployment e do ReplicaSet dentro do Kubernetes.
 
 > **Dica:** É bom trabalhar em pequenos grupos para discutir como adaptar os Deployments para o Projeto do Módulo.
 
@@ -202,3 +202,47 @@ spec:
 ```
 
 > **Dica:** Quando quiser deletar o seu Deployment, basta usar o comando `kubectl delete deployment nginx-deployment` para fazer o Kubernetes remover as Pods relacionadas a esse Deployment.
+
+<br/>
+
+**Roteiro do Lab 02:**
+
+Este Lab irá apresentar o conceito de Dashboard do Minikube e do Service dentro do Kubernetes.
+
+> **Dica:** Esse Lab é importante para quem não teve tempo de configurar o ambiente na última instrução ou para quem está com dificuldades de compreender o funcionamento básico do Minikube.
+
+1. Vamos inicializar o Dashboard do Kubernetes, onde podemos visualizar as métricas básicas de monitoramento e ver o status do ambiente, o comando para a inicialização é o:
+
+```
+minikube dashboard
+```
+
+> **Dica:** Dê uma olhada nos itens dentro do Dashboard, existem inúmeros componentes que podemos configurar em nosso ambiente de orquestração.
+
+2. Agora vamos fazer o deploy de um Service, que serve como uma camada de desacoplamento entre os usuários e as Pods, primeiro precisamos subir uma ou mais Pods antes de expor o serviço:
+
+```
+kubectl create deployment hello-minikube --image=kicbase/echo-server:1.0
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+```
+
+3. Para verificar se o Service foi deployado corretamente, basta executar o comando:
+
+```
+kubectl get services hello-minikube
+```
+
+4. Podemos agora acessar essa Pod indiretamente por meio do Service que acabamos de criar, uma das maneiras é pedir para o Minikube abrir o browser no endpoint criado pelo Service:
+
+```
+minikube service hello-minikube
+```
+
+5. Deverá aparecer um output no browser com cabeçalho semelhante a esse:
+
+```
+Request served by hello-minikube-5c898d8489-kxg55
+
+HTTP/1.1 GET /
+```
+
